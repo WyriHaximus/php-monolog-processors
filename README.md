@@ -30,7 +30,7 @@ new KeyValueProcessor('version', 'v1.33.128');
 Add `runtime` into `extra` array of the record with `microtime(true)` since creation of `RuntimeProcessor`. For example:
 
 ```php
-new KeyValueProcessor();
+new RuntimeProcessor();
 ```
 
 ## ToContextProcessor(array $keys = ['channel', 'extra', 'datetime'])
