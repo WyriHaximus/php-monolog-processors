@@ -10,7 +10,6 @@ final class TraceProcessorTest extends TestCase
     public function testNoTrace()
     {
         $processor = new TraceProcessor();
-        $line = __LINE__ + 1;
         $record = $processor([]);
 
         self::assertFalse(isset($record['extra']['trace']));
