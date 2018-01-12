@@ -41,6 +41,14 @@ Copy the given items in the record array `context` item. For example:
 new ToContextProcessor();
 ```
 
+## TraceProcessor()
+
+Adds `trace` into `extra` with the contents of `debug_backtrace` or `Throwable::getTrace` without the arguments.
+
+```php
+new TraceProcessor();
+```
+
 # License
 
 The MIT License (MIT)
