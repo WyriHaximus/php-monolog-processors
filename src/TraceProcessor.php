@@ -7,6 +7,19 @@ use Throwable;
 final class TraceProcessor
 {
     /**
+     * @var bool
+     */
+    private $always = false;
+
+    /**
+     * @param bool $always
+     */
+    public function __construct(bool $always = false)
+    {
+        $this->always = $always;
+    }
+
+    /**
      * @param  array $record
      * @return array
      */
@@ -23,7 +36,7 @@ final class TraceProcessor
             }
         }
 
-        if (!isset($record['extra']['trace'])) {
+        if ($this->always && !isset($record['extra']['trace'])) {
             $record['extra']['trace'] = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         }
 

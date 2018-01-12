@@ -7,9 +7,18 @@ use WyriHaximus\Monolog\Processors\TraceProcessor;
 
 final class TraceProcessorTest extends TestCase
 {
-    public function testNonExceptionTrace()
+    public function testNoTrace()
     {
         $processor = new TraceProcessor();
+        $line = __LINE__ + 1;
+        $record = $processor([]);
+
+        self::assertFalse(isset($record['extra']['trace']));
+    }
+
+    public function testNonExceptionTrace()
+    {
+        $processor = new TraceProcessor(true);
         $line = __LINE__ + 1;
         $record = $processor([]);
 
