@@ -17,6 +17,14 @@ composer require wyrihaximus/monolog-processors
 
 # Processors
 
+## ExceptionClassProcessor()
+
+When encountering a throwable in `context.exception` it adds the class name into `context.exception_class`: 
+
+```php
+new ExceptionClassProcessor();
+```
+
 ## KeyValueProcessor(string $key, $value)
 
 Add a fixed value for a fixed key into the `extra` array of the record. For example:
@@ -43,7 +51,7 @@ new ToContextProcessor();
 
 ## TraceProcessor()
 
-Adds `trace` into `extra` with the contents of `debug_backtrace` or `Throwable::getTrace` without the arguments.
+Adds `trace` into `extra` with the contents of `debug_backtrace` (when true is passed into the constructor) or `Throwable::getTrace` without the arguments.
 
 ```php
 new TraceProcessor();
