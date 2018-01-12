@@ -13,7 +13,7 @@ final class TraceProcessor
     public function __invoke(array $record)
     {
         if (isset($record['context']['exception']) && $record['context']['exception'] instanceof Throwable) {
-            $record['extra']['trace'] = $record['context']['exception']->getTrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+            $record['extra']['trace'] = $record['context']['exception']->getTrace();
             foreach ($record['extra']['trace'] as $index => $line) {
                 if (!isset($line['args'])) {
                     continue;
