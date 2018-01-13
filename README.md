@@ -1,4 +1,4 @@
-# Middleware that removes the raw body from the request
+# Processors for Monolog
 
 [![Build Status](https://travis-ci.org/WyriHaximus/php-monolog-processors.svg?branch=master)](https://travis-ci.org/WyriHaximus/php-monolog-processors)
 [![Latest Stable Version](https://poser.pugx.org/WyriHaximus/monolog-processors/v/stable.png)](https://packagist.org/packages/WyriHaximus/monolog-processors)
