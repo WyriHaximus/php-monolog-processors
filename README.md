@@ -19,6 +19,35 @@ composer require wyrihaximus/monolog-processors
 
 ## ExceptionClassProcessor()
 
+Copies a value from the location in the first argument to the location in the second argument in the record array. 
+
+```php
+new CopyProcessor('context.abc', 'context.def');
+```
+
+So the following record:
+
+```php
+$record = [
+    'context' => [
+        'abc' => 'value',
+    ],
+];
+```
+
+Becomes: 
+
+```php
+$record = [
+    'context' => [
+        'abc' => 'value',
+        'def' => 'value',
+    ],
+];
+```
+
+## ExceptionClassProcessor()
+
 When encountering a throwable in `context.exception` it adds the class name into `context.exception_class`: 
 
 ```php
