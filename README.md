@@ -17,7 +17,7 @@ composer require wyrihaximus/monolog-processors
 
 # Processors
 
-## ExceptionClassProcessor()
+## CopyProcessor()
 
 Copies a value from the location in the first argument to the location in the second argument in the record array. 
 
