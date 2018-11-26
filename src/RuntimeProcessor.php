@@ -11,7 +11,7 @@ final class RuntimeProcessor
 
     public function __construct()
     {
-        $this->start = microtime(true);
+        $this->start = \microtime(true);
     }
 
     /**
@@ -20,7 +20,7 @@ final class RuntimeProcessor
      */
     public function __invoke(array $record)
     {
-        $record['extra']['runtime'] = microtime(true) - $this->start;
+        $record['extra']['runtime'] = \microtime(true) - $this->start;
 
         return $record;
     }

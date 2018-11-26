@@ -5,9 +5,12 @@ namespace WyriHaximus\Tests\Monolog\Processors;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\CopyProcessor;
 
+/**
+ * @internal
+ */
 final class CopyProcessorTest extends TestCase
 {
-    public function testCopy()
+    public function testCopy(): void
     {
         $processor = new CopyProcessor('context.abc', 'context.def');
         $fromRecord = [

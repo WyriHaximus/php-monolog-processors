@@ -37,7 +37,7 @@ final class TraceProcessor
         }
 
         if ($this->always && !isset($record['extra']['trace'])) {
-            $record['extra']['trace'] = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+            $record['extra']['trace'] = \debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         }
 
         return $record;

@@ -6,9 +6,12 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\ExceptionClassProcessor;
 
+/**
+ * @internal
+ */
 final class ExceptionClassProcessorTest extends TestCase
 {
-    public function testNoException()
+    public function testNoException(): void
     {
         $processor = new ExceptionClassProcessor();
         $record = $processor([]);
@@ -16,7 +19,7 @@ final class ExceptionClassProcessorTest extends TestCase
         self::assertSame([], $record);
     }
 
-    public function testException()
+    public function testException(): void
     {
         $processor = new ExceptionClassProcessor();
         $exception = new Exception('fail!');

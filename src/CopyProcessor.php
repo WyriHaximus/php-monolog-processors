@@ -23,8 +23,8 @@ final class CopyProcessor
      */
     public function __construct(string $from, string $to)
     {
-        $this->from = explode('.', $from);
-        $this->to = explode('.', $to);
+        $this->from = \explode('.', $from);
+        $this->to = \explode('.', $to);
     }
 
     /**

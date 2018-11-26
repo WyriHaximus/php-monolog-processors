@@ -5,9 +5,12 @@ namespace WyriHaximus\Tests\Monolog\Processors;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\RuntimeProcessor;
 
+/**
+ * @internal
+ */
 final class RuntimeProcessorTest extends TestCase
 {
-    public function testKeyValue()
+    public function testKeyValue(): void
     {
         $processor = new RuntimeProcessor();
         $record = $processor([]);

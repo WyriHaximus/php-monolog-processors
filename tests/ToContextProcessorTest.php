@@ -5,9 +5,12 @@ namespace WyriHaximus\Tests\Monolog\Processors;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\ToContextProcessor;
 
+/**
+ * @internal
+ */
 final class ToContextProcessorTest extends TestCase
 {
-    public function testKeyValue()
+    public function testKeyValue(): void
     {
         $now = new \DateTimeImmutable();
         $extra = [

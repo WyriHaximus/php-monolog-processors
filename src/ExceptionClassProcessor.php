@@ -11,7 +11,7 @@ final class ExceptionClassProcessor
     public function __invoke(array $record)
     {
         if (isset($record['context']['exception'])) {
-            $record['extra']['exception_class'] = get_class($record['context']['exception']);
+            $record['extra']['exception_class'] = \get_class($record['context']['exception']);
         }
 
         return $record;
