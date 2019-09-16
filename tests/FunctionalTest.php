@@ -141,9 +141,11 @@ final class FunctionalTest extends TestCase
                 $this->handler = $handler;
             }
 
-            public function handle(array $record): void
+            public function handle(array $record): bool
             {
                 ($this->handler)($record);
+
+                return true;
             }
         });
 
