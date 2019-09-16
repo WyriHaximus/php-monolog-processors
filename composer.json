@@ -11,7 +11,7 @@
     "require": {
         "php": "^7.2",
         "igorw/get-in": "^1.0",
-        "monolog/monolog": "^1.25"
+        "monolog/monolog": "^1.25 || ^2.0"
     },
     "require-dev": {
         "wyrihaximus/cs-fixer-config": "^1.0",
