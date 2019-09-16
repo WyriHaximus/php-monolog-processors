@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": "^7.2",
-        "igorw/get-in": "^1.0"
+        "igorw/get-in": "^1.0",
+        "monolog/monolog": "^1.25"
     },
     "require-dev": {
         "api-clients/cs-fixer-config": "^1.1",

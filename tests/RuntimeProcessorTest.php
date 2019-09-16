@@ -15,6 +15,6 @@ final class RuntimeProcessorTest extends TestCase
         $processor = new RuntimeProcessor();
         $record = $processor([]);
         self::assertTrue(isset($record['extra']['runtime']));
-        self::assertInternalType('float', $record['extra']['runtime']);
+        self::assertIsFloat($record['extra']['runtime']);
     }
 }
