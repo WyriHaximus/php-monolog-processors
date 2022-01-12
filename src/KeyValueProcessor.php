@@ -1,34 +1,32 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Monolog\Processors;
 
+use Monolog\Logger;
+
+/**
+ * @phpstan-import-type Record from Logger
+ */
 final class KeyValueProcessor
 {
-    /**
-     * @var string
-     */
-    private $key;
+    private string $key;
 
-    /**
-     * @var mixed
-     */
-    private $value;
+    private mixed $value;
 
-    /**
-     * @param string $key
-     * @param mixed  $value
-     */
-    public function __construct(string $key, $value)
+    public function __construct(string $key, mixed $value)
     {
-        $this->key = $key;
+        $this->key   = $key;
         $this->value = $value;
     }
 
     /**
-     * @param  array $record
-     * @return array
+     * @phpstan-param Record $record
+     *
+     * @phpstan-return Record
      */
-    public function __invoke(array $record)
+    public function __invoke(array $record): array
     {
         $record['extra'][$this->key] = $this->value;
 

@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\Monolog\Processors;
 
 use PHPUnit\Framework\TestCase;
+use Safe\DateTimeImmutable;
 use WyriHaximus\Monolog\Processors\ToContextProcessor;
 
 /**
@@ -12,28 +15,18 @@ final class ToContextProcessorTest extends TestCase
 {
     public function testKeyValue(): void
     {
-        $now = new \DateTimeImmutable();
-        $extra = [
-            'foo' => 'bar',
-        ];
+        $now       = new DateTimeImmutable();
+        $extra     = ['foo' => 'bar'];
         $processor = new ToContextProcessor(['datetime', 'extra']);
-        $record = $processor([
+        $record    = $processor([
             'datetime' => $now,
             'extra' => $extra,
             'excluded' => [],
-        ]);
+        ] + Records::basic());
 
-        self::assertSame(
-            [
-                'datetime' => $now,
-                'extra' => $extra,
-                'excluded' => [],
-                'context' => [
-                    'datetime' => $now,
-                    'extra' => $extra,
-                ],
-            ],
-            $record
-        );
+        self::assertArrayHasKey('datetime', $record['context']);
+        self::assertSame($now, $record['context']['datetime']);
+        self::assertArrayHasKey('extra', $record['context']);
+        self::assertSame($extra, $record['context']['extra']);
     }
 }

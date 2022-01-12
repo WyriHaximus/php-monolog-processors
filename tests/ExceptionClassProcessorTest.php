@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\Monolog\Processors;
 
-use Exception;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\ExceptionClassProcessor;
 
@@ -13,23 +15,22 @@ final class ExceptionClassProcessorTest extends TestCase
 {
     public function testNoException(): void
     {
+        $input     = Records::basic();
         $processor = new ExceptionClassProcessor();
-        $record = $processor([]);
+        $record    = $processor($input);
 
-        self::assertSame([], $record);
+        self::assertSame($input, $record);
     }
 
     public function testException(): void
     {
         $processor = new ExceptionClassProcessor();
-        $exception = new Exception('fail!');
-        $record = $processor([
-            'context' => [
-                'exception' => $exception,
-            ],
-        ]);
+        $exception = new InvalidArgumentException('fail!');
+        $record    = $processor([
+            'context' => ['exception' => $exception],
+        ] + Records::basic());
 
-        self::assertTrue(isset($record['extra']['exception_class']));
-        self::assertSame(Exception::class, $record['extra']['exception_class']);
+        self::assertArrayHasKey('exception_class', $record['extra']);
+        self::assertSame(InvalidArgumentException::class, $record['extra']['exception_class']);
     }
 }
