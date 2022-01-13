@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\Monolog\Processors;
 
-use Monolog\Handler\AbstractHandler;
+use Exception;
 use Monolog\Logger;
 use Monolog\Utils;
 use Psr\Log\LogLevel;
@@ -14,12 +16,16 @@ use WyriHaximus\Monolog\Processors\ToContextProcessor;
 use WyriHaximus\Monolog\Processors\TraceProcessor;
 use WyriHaximus\TestUtilities\TestCase;
 
+use function array_key_exists;
+use function Safe\sprintf;
+
 /**
- * @internal
+ * @phpstan-import-type Record from Logger
  */
 final class FunctionalTest extends TestCase
 {
-    private $logs = [];
+    /** @phpstan-var array<Record> */
+    private array $logs = [];
 
     public function testBasic(): void
     {
@@ -28,7 +34,6 @@ final class FunctionalTest extends TestCase
         $monolog->info('message');
 
         self::assertCount(1, $this->logs);
-        self::assertArrayHasKey('datetime', $this->logs[0]);
         self::assertArrayHasKey('datetime', $this->logs[0]['context']);
         self::assertArrayHasKey('runtime', $this->logs[0]['extra']);
         self::assertSame($this->logs[0]['datetime'], $this->logs[0]['context']['datetime']);
@@ -44,16 +49,12 @@ final class FunctionalTest extends TestCase
                 'message' => 'message',
                 'context' => [
                     'channel' => 'logger',
-                    'extra' => [
-                        'version' => '1.2.3',
-                    ],
+                    'extra' => ['version' => '1.2.3'],
                 ],
                 'level' => 200,
                 'level_name' => 'INFO',
                 'channel' => 'logger',
-                'extra' => [
-                    'version' => '1.2.3',
-                ],
+                'extra' => ['version' => '1.2.3'],
             ],
         ], $this->logs);
     }
@@ -62,16 +63,17 @@ final class FunctionalTest extends TestCase
     {
         $monolog = $this->provideMonolog();
 
-        $e = new \Exception('Poof!');
-        $message = \sprintf('Uncaught Exception %s: "%s" at %s line %s', Utils::getClass($e), $e->getMessage(), $e->getFile(), $e->getLine());
-        $trace = $e->getTrace();
+        $e       = new Exception('Poof!');
+        $message = sprintf('Uncaught Exception %s: "%s" at %s line %s', Utils::getClass($e), $e->getMessage(), $e->getFile(), $e->getLine());
+        $trace   = $e->getTrace();
         foreach ($trace as $index => $line) {
-            if (!isset($line['args'])) {
+            if (! array_key_exists('args', $line)) {
                 continue;
             }
 
             unset($trace[$index]['args']);
         }
+
         $monolog->log(
             LogLevel::ERROR,
             $message,
@@ -79,7 +81,6 @@ final class FunctionalTest extends TestCase
         );
 
         self::assertCount(1, $this->logs);
-        self::assertArrayHasKey('datetime', $this->logs[0]);
         self::assertArrayHasKey('datetime', $this->logs[0]['context']);
         self::assertArrayHasKey('runtime', $this->logs[0]['extra']);
         self::assertSame($this->logs[0]['datetime'], $this->logs[0]['context']['datetime']);
@@ -116,6 +117,9 @@ final class FunctionalTest extends TestCase
         ], $this->logs);
     }
 
+    /**
+     * @return iterable<callable>
+     */
     private function provideProcessors(): iterable
     {
         yield new ToContextProcessor();
@@ -130,24 +134,9 @@ final class FunctionalTest extends TestCase
     {
         $monolog = new Logger('logger');
 
-        $monolog->pushHandler(new class(function ($log): void {
+        $monolog->pushHandler(new FunctionalTestLogger(function ($log): void {
             $this->logs[] = $log;
-        }) extends AbstractHandler {
-            /** @var callable */
-            private $handler;
-
-            public function __construct(callable $handler)
-            {
-                $this->handler = $handler;
-            }
-
-            public function handle(array $record): bool
-            {
-                ($this->handler)($record);
-
-                return true;
-            }
-        });
+        }));
 
         foreach ($this->provideProcessors() as $processor) {
             $monolog->pushProcessor($processor);

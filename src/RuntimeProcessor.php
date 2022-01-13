@@ -1,26 +1,33 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Monolog\Processors;
 
+use Monolog\Logger;
+
+use function microtime;
+
+/**
+ * @phpstan-import-type Record from Logger
+ */
 final class RuntimeProcessor
 {
-    /**
-     * @var float
-     */
-    private $start;
+    private float $start;
 
     public function __construct()
     {
-        $this->start = \microtime(true);
+        $this->start = microtime(true);
     }
 
     /**
-     * @param  array $record
-     * @return array
+     * @phpstan-param Record $record
+     *
+     * @phpstan-return Record
      */
-    public function __invoke(array $record)
+    public function __invoke(array $record): array
     {
-        $record['extra']['runtime'] = \microtime(true) - $this->start;
+        $record['extra']['runtime'] = microtime(true) - $this->start;
 
         return $record;
     }

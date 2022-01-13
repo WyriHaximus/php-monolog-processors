@@ -1,16 +1,25 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Monolog\Processors;
 
+use Monolog\Logger;
+
+use function array_key_exists;
+
+/**
+ * @phpstan-import-type Record from Logger
+ */
 final class ToContextProcessor
 {
-    /**
-     * @var string[]
-     */
-    private $keys;
+    /** @var string[] */
+    private array $keys;
 
     /**
      * @param string[] $keys
+     *
+     * @phpstan-ignore-next-line
      */
     public function __construct(array $keys = ['channel', 'extra', 'datetime'])
     {
@@ -18,15 +27,17 @@ final class ToContextProcessor
     }
 
     /**
-     * @param  array $record
-     * @return array
+     * @phpstan-param Record $record
+     *
+     * @phpstan-return Record
      */
-    public function __invoke(array $record)
+    public function __invoke(array $record): array
     {
         foreach ($this->keys as $key) {
-            if (!isset($record[$key])) {
+            if (! array_key_exists($key, $record)) {
                 continue;
             }
+
             $record['context'][$key] = $record[$key];
         }
 

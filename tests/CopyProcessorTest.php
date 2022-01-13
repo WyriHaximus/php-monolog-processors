@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\Monolog\Processors;
 
@@ -12,16 +14,14 @@ final class CopyProcessorTest extends TestCase
 {
     public function testCopy(): void
     {
-        $processor = new CopyProcessor('context.abc', 'context.def');
+        $processor  = new CopyProcessor('context.abc', 'context.def');
         $fromRecord = [
-            'context' => [
-                'abc' => 'value',
-            ],
-        ];
+            'context' => ['abc' => 'value'],
+        ] + Records::basic();
 
         $toRecord = $processor($fromRecord);
 
-        self::assertTrue(isset($toRecord['context']['def']));
+        self::assertArrayHasKey('def', $toRecord['context']);
         self::assertEquals('value', $toRecord['context']['abc']);
         self::assertEquals('value', $toRecord['context']['def']);
     }

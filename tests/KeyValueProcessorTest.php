@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\Monolog\Processors;
 
@@ -12,14 +14,11 @@ final class KeyValueProcessorTest extends TestCase
 {
     public function testKeyValue(): void
     {
-        $key = 'key';
-        $value = 'value';
+        $key       = 'key';
+        $value     = 'value';
         $processor = new KeyValueProcessor($key, $value);
-        $record = $processor([]);
-        self::assertSame([
-            'extra' => [
-                $key => $value,
-            ],
-        ], $record);
+        $record    = $processor(Records::basic());
+        self::assertArrayHasKey($key, $record['extra']);
+        self::assertSame($value, $record['extra'][$key]);
     }
 }
