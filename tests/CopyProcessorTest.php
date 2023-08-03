@@ -7,9 +7,7 @@ namespace WyriHaximus\Tests\Monolog\Processors;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\CopyProcessor;
 
-/**
- * @internal
- */
+/** @internal */
 final class CopyProcessorTest extends TestCase
 {
     public function testCopy(): void

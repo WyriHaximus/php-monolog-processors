@@ -7,11 +7,9 @@ namespace WyriHaximus\Tests\Monolog\Processors;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\RuntimeProcessor;
 
-use function Safe\sleep;
+use function sleep;
 
-/**
- * @internal
- */
+/** @internal */
 final class RuntimeProcessorTest extends TestCase
 {
     public function testKeyValue(): void

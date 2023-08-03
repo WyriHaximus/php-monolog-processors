@@ -8,9 +8,7 @@ use Monolog\Logger;
 
 use function microtime;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class RuntimeProcessor
 {
     private float $start;

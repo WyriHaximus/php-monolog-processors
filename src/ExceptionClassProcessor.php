@@ -10,9 +10,7 @@ use Throwable;
 use function array_key_exists;
 use function get_class;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class ExceptionClassProcessor
 {
     /**

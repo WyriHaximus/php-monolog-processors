@@ -17,11 +17,9 @@ use WyriHaximus\Monolog\Processors\TraceProcessor;
 use WyriHaximus\TestUtilities\TestCase;
 
 use function array_key_exists;
-use function Safe\sprintf;
+use function sprintf;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class FunctionalTest extends TestCase
 {
     /** @phpstan-var array<Record> */
@@ -77,7 +75,7 @@ final class FunctionalTest extends TestCase
         $monolog->log(
             LogLevel::ERROR,
             $message,
-            ['exception' => $e]
+            ['exception' => $e],
         );
 
         self::assertCount(1, $this->logs);
@@ -117,9 +115,7 @@ final class FunctionalTest extends TestCase
         ], $this->logs);
     }
 
-    /**
-     * @return iterable<callable>
-     */
+    /** @return iterable<callable> */
     private function provideProcessors(): iterable
     {
         yield new ToContextProcessor();

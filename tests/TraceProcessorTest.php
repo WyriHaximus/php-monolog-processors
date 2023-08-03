@@ -10,9 +10,7 @@ use WyriHaximus\Monolog\Processors\TraceProcessor;
 
 use function count;
 
-/**
- * @internal
- */
+/** @internal */
 final class TraceProcessorTest extends TestCase
 {
     public function testNoTrace(): void

@@ -12,14 +12,10 @@ use function debug_backtrace;
 
 use const DEBUG_BACKTRACE_IGNORE_ARGS;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class TraceProcessor
 {
-    /**
-     * @phpstan-ignore-next-line
-     */
+    /** @phpstan-ignore-next-line */
     public function __construct(private bool $always = false)
     {
     }

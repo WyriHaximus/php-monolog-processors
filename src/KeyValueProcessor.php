@@ -6,19 +6,11 @@ namespace WyriHaximus\Monolog\Processors;
 
 use Monolog\Logger;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class KeyValueProcessor
 {
-    private string $key;
-
-    private mixed $value;
-
-    public function __construct(string $key, mixed $value)
+    public function __construct(private string $key, private mixed $value)
     {
-        $this->key   = $key;
-        $this->value = $value;
     }
 
     /**

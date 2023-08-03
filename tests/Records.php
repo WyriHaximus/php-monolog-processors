@@ -7,14 +7,10 @@ namespace WyriHaximus\Tests\Monolog\Processors;
 use Monolog\Logger;
 use Safe\DateTimeImmutable;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class Records
 {
-    /**
-     * @phpstan-return Record
-     */
+    /** @phpstan-return Record */
     public static function basic(): array
     {
         return [

@@ -8,9 +8,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\ExceptionClassProcessor;
 
-/**
- * @internal
- */
+/** @internal */
 final class ExceptionClassProcessorTest extends TestCase
 {
     public function testNoException(): void
