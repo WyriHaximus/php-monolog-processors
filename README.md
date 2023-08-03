@@ -1,11 +1,10 @@
 # Processors for Monolog
 
-[![Build Status](https://travis-ci.org/WyriHaximus/php-monolog-processors.svg?branch=master)](https://travis-ci.org/WyriHaximus/php-monolog-processors)
-[![Latest Stable Version](https://poser.pugx.org/WyriHaximus/monolog-processors/v/stable.png)](https://packagist.org/packages/WyriHaximus/monolog-processors)
-[![Total Downloads](https://poser.pugx.org/WyriHaximus/monolog-processors/downloads.png)](https://packagist.org/packages/WyriHaximus/monolog-processors)
-[![Code Coverage](https://scrutinizer-ci.com/g/WyriHaximus/php-monolog-processors/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WyriHaximus/php-monolog-processors/?branch=master)
-[![License](https://poser.pugx.org/WyriHaximus/monolog-processors/license.png)](https://packagist.org/packages/WyriHaximus/monolog-processors)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/WyriHaximus/php-monolog-processors/badge.svg)](https://travis-ci.org/WyriHaximus/php-monolog-processors)
+![Continuous Integration](https://github.com/wyrihaximus/php-monolog-processors/workflows/Continuous%20Integration/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/wyrihaximus/monolog-processors/v/stable.png)](https://packagist.org/packages/wyrihaximus/monolog-processors)
+[![Total Downloads](https://poser.pugx.org/wyrihaximus/monolog-processors/downloads.png)](https://packagist.org/packages/wyrihaximus/monolog-processors/stats)
+[![Type Coverage](https://shepherd.dev/github/WyriHaximus/php-monolog-processors/coverage.svg)](https://shepherd.dev/github/WyriHaximus/php-monolog-processors)
+[![License](https://poser.pugx.org/wyrihaximus/monolog-processors/license.png)](https://packagist.org/packages/wyrihaximus/monolog-processors)
 
 # Install
 
@@ -19,7 +18,7 @@ composer require wyrihaximus/monolog-processors
 
 ## CopyProcessor()
 
-Copies a value from the location in the first argument to the location in the second argument in the record array. 
+Copies a value from the location in the first argument to the location in the second argument in the record array.
 
 ```php
 new CopyProcessor('context.abc', 'context.def');
@@ -35,7 +34,7 @@ $record = [
 ];
 ```
 
-Becomes: 
+Becomes:
 
 ```php
 $record = [
@@ -48,7 +47,7 @@ $record = [
 
 ## ExceptionClassProcessor()
 
-When encountering a throwable in `context.exception` it adds the class name into `context.exception_class`: 
+When encountering a throwable in `context.exception` it adds the class name into `context.exception_class`:
 
 ```php
 new ExceptionClassProcessor();
@@ -90,7 +89,7 @@ new TraceProcessor();
 
 The MIT License (MIT)
 
-Copyright (c) 2022 Cees-Jan Kiewiet
+Copyright (c) 2023 Cees-Jan Kiewiet
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
