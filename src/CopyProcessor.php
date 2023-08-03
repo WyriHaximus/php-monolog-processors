@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Monolog\Processors;
 
-use Monolog\Logger;
+use Monolog\LogRecord;
+use Monolog\Processor\ProcessorInterface;
 
+use function array_merge_recursive;
 use function explode;
 use function igorw\assoc_in;
 use function igorw\get_in;
 
-/** @phpstan-import-type Record from Logger */
-final class CopyProcessor
+final class CopyProcessor implements ProcessorInterface
 {
-    /** @var string[] */
+    /** @var array<string> */
     private array $from;
 
-    /** @var string[] */
+    /** @var array<string> */
     private array $to;
 
     public function __construct(string $from, string $to)
@@ -25,16 +26,11 @@ final class CopyProcessor
         $this->to   = explode('.', $to);
     }
 
-    /**
-     * @phpstan-param Record $record
-     *
-     * @phpstan-return Record
-     */
-    public function __invoke(array $record): array
+    public function __invoke(LogRecord $record): LogRecord
     {
-        $value = get_in($record, $this->from);
+        $value = get_in($record->toArray(), $this->from);
         if ($value !== null) {
-            $record = assoc_in($record, $this->to, $value);
+            $record = $record->with(...array_merge_recursive(assoc_in([], $this->to, $value), ['context' => $record->context, 'extra' => $record->extra]));
         }
 
         return $record;
