@@ -31,7 +31,9 @@
             "infection/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "icanhazstring/composer-unused": true,
-            "ergebnis/composer-normalize": true
+            "ergebnis/composer-normalize": true,
+            "ocramius/package-versions": true,
+            "localheinz/composer-normalize": true
         },
         "platform": {
             "php": "8.0.12"
