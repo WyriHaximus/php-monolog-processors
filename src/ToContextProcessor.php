@@ -8,22 +8,16 @@ use Monolog\Logger;
 
 use function array_key_exists;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class ToContextProcessor
 {
-    /** @var string[] */
-    private array $keys;
-
     /**
      * @param string[] $keys
      *
      * @phpstan-ignore-next-line
      */
-    public function __construct(array $keys = ['channel', 'extra', 'datetime'])
+    public function __construct(private array $keys = ['channel', 'extra', 'datetime'])
     {
-        $this->keys = $keys;
     }
 
     /**

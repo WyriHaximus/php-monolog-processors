@@ -8,9 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Safe\DateTimeImmutable;
 use WyriHaximus\Monolog\Processors\ToContextProcessor;
 
-/**
- * @internal
- */
+/** @internal */
 final class ToContextProcessorTest extends TestCase
 {
     public function testKeyValue(): void

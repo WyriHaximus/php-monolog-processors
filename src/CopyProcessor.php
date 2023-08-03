@@ -10,9 +10,7 @@ use function explode;
 use function igorw\assoc_in;
 use function igorw\get_in;
 
-/**
- * @phpstan-import-type Record from Logger
- */
+/** @phpstan-import-type Record from Logger */
 final class CopyProcessor
 {
     /** @var string[] */

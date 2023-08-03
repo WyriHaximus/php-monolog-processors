@@ -1,9 +1,8 @@
 parameters:
-	ignoreErrors:
-		- '#Method WyriHaximus\\Monolog\\Processors\\ToContextProcessor::__invoke\(\) should return array\{message:#'
 	ergebnis:
-		classesAllowedToBeExtended:
-			- Monolog\Handler\AbstractHandler
+		noExtends:
+			classesAllowedToBeExtended:
+				- Monolog\Handler\AbstractHandler
 
 includes:
 	- ../../vendor/wyrihaximus/test-utilities/rules.neon
