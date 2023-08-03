@@ -11,7 +11,7 @@
     "require": {
         "php": "^8",
         "igorw/get-in": "^1.0.3",
-        "monolog/monolog": "^2.3"
+        "monolog/monolog": "^2.9.1"
     },
     "require-dev": {
         "wyrihaximus/test-utilities": "^5.0.1"
