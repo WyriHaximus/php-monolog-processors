@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Monolog\Processors;
 
-use Monolog\Logger;
+use Monolog\LogRecord;
+use Monolog\Processor\ProcessorInterface;
 
 use function array_key_exists;
 
-/** @phpstan-import-type Record from Logger */
-final class ToContextProcessor
+final class ToContextProcessor implements ProcessorInterface
 {
     /**
-     * @param string[] $keys
+     * @param array<string> $keys
      *
      * @phpstan-ignore-next-line
      */
@@ -20,19 +20,14 @@ final class ToContextProcessor
     {
     }
 
-    /**
-     * @phpstan-param Record $record
-     *
-     * @phpstan-return Record
-     */
-    public function __invoke(array $record): array
+    public function __invoke(LogRecord $record): LogRecord
     {
         foreach ($this->keys as $key) {
-            if (! array_key_exists($key, $record)) {
+            if (! array_key_exists($key, $record->toArray())) {
                 continue;
             }
 
-            $record['context'][$key] = $record[$key];
+            $record = $record->with(context: [$key => $record->toArray()[$key]] + $record->toArray()['context']);
         }
 
         return $record;

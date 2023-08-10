@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace WyriHaximus\Tests\Monolog\Processors;
 
 use Monolog\Handler\AbstractHandler;
-use Monolog\Logger;
+use Monolog\LogRecord;
 
-/** @phpstan-import-type Record from Logger */
 final class FunctionalTestLogger extends AbstractHandler
 {
     /** @var callable */
@@ -20,8 +19,7 @@ final class FunctionalTestLogger extends AbstractHandler
         parent::__construct();
     }
 
-    /** @phpstan-param Record $record */
-    public function handle(array $record): bool
+    public function handle(LogRecord $record): bool
     {
         ($this->handler)($record);
 

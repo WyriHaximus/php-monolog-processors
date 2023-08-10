@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Monolog\Processors;
 
-use Monolog\Logger;
+use Monolog\LogRecord;
+use Monolog\Processor\ProcessorInterface;
 
 use function microtime;
 
-/** @phpstan-import-type Record from Logger */
-final class RuntimeProcessor
+final class RuntimeProcessor implements ProcessorInterface
 {
     private float $start;
 
@@ -18,14 +18,9 @@ final class RuntimeProcessor
         $this->start = microtime(true);
     }
 
-    /**
-     * @phpstan-param Record $record
-     *
-     * @phpstan-return Record
-     */
-    public function __invoke(array $record): array
+    public function __invoke(LogRecord $record): LogRecord
     {
-        $record['extra']['runtime'] = microtime(true) - $this->start;
+        $record->extra['runtime'] = microtime(true) - $this->start;
 
         return $record;
     }

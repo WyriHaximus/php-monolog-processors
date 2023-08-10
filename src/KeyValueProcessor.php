@@ -4,23 +4,18 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Monolog\Processors;
 
-use Monolog\Logger;
+use Monolog\LogRecord;
+use Monolog\Processor\ProcessorInterface;
 
-/** @phpstan-import-type Record from Logger */
-final class KeyValueProcessor
+final class KeyValueProcessor implements ProcessorInterface
 {
     public function __construct(private string $key, private mixed $value)
     {
     }
 
-    /**
-     * @phpstan-param Record $record
-     *
-     * @phpstan-return Record
-     */
-    public function __invoke(array $record): array
+    public function __invoke(LogRecord $record): LogRecord
     {
-        $record['extra'][$this->key] = $this->value;
+        $record->extra[$this->key] = $this->value;
 
         return $record;
     }
