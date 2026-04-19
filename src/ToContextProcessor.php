@@ -9,7 +9,8 @@ use Monolog\Processor\ProcessorInterface;
 
 use function array_key_exists;
 
-final class ToContextProcessor implements ProcessorInterface
+/** @api */
+final readonly class ToContextProcessor implements ProcessorInterface
 {
     /**
      * @param array<string> $keys

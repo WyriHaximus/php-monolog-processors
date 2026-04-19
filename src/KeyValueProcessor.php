@@ -7,7 +7,8 @@ namespace WyriHaximus\Monolog\Processors;
 use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
 
-final class KeyValueProcessor implements ProcessorInterface
+/** @api */
+final readonly class KeyValueProcessor implements ProcessorInterface
 {
     public function __construct(private string $key, private mixed $value)
     {

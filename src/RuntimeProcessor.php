@@ -9,7 +9,8 @@ use Monolog\Processor\ProcessorInterface;
 
 use function microtime;
 
-final class RuntimeProcessor implements ProcessorInterface
+/** @api */
+final readonly class RuntimeProcessor implements ProcessorInterface
 {
     private float $start;
 

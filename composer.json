@@ -1,51 +1,55 @@
 {
-    "name": "wyrihaximus/monolog-processors",
-    "description": "Collection of additional processors for monolog",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Cees-Jan Kiewiet",
-            "email": "ceesjank@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^8.2",
-        "igorw/get-in": "^1.0.3",
-        "monolog/monolog": "^3.4.0"
-    },
-    "require-dev": {
-        "wyrihaximus/test-utilities": "^5.6.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "WyriHaximus\\Monolog\\Processors\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "WyriHaximus\\Tests\\Monolog\\Processors\\": "tests/"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "infection/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "icanhazstring/composer-unused": true,
-            "ergebnis/composer-normalize": true,
-            "ocramius/package-versions": true,
-            "localheinz/composer-normalize": true
-        },
-        "platform": {
-            "php": "8.2.13"
-        },
-        "sort-packages": true
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "composer normalize"
-        ],
-        "post-update-cmd": [
-            "composer normalize"
-        ]
+  "name": "wyrihaximus/monolog-processors",
+  "description": "Collection of additional processors for monolog",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cees-Jan Kiewiet",
+      "email": "ceesjank@gmail.com"
     }
+  ],
+  "require": {
+    "php": "^8.4",
+    "igorw/get-in": "^1.0.3",
+    "monolog/monolog": "^3.4.0"
+  },
+  "require-dev": {
+    "wyrihaximus/makefiles": "^0.7.16",
+    "wyrihaximus/test-utilities": "^12.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WyriHaximus\\Monolog\\Processors\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "WyriHaximus\\Tests\\Monolog\\Processors\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "ergebnis/composer-normalize": true,
+      "icanhazstring/composer-unused": true,
+      "infection/extension-installer": true,
+      "localheinz/composer-normalize": true,
+      "ocramius/package-versions": true,
+      "phpstan/extension-installer": true,
+      "wyrihaximus/makefiles": true,
+      "wyrihaximus/test-utilities": true
+    },
+    "platform": {
+      "php": "8.4.13"
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "make on-install-or-update || true"
+    ],
+    "post-update-cmd": [
+      "make on-install-or-update || true"
+    ]
+  }
 }

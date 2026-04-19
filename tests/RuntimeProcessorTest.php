@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace WyriHaximus\Tests\Monolog\Processors;
 
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\RuntimeProcessor;
 
@@ -13,7 +14,8 @@ use function sleep;
 /** @internal */
 final class RuntimeProcessorTest extends TestCase
 {
-    public function testKeyValue(): void
+    #[Test]
+    public function keyValue(): void
     {
         $processor      = new RuntimeProcessor();
         $baselineRecord = $processor(new LogRecord(...Records::basic()));

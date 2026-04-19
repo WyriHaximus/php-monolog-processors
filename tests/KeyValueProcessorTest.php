@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace WyriHaximus\Tests\Monolog\Processors;
 
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\KeyValueProcessor;
 
 /** @internal */
 final class KeyValueProcessorTest extends TestCase
 {
-    public function testKeyValue(): void
+    #[Test]
+    public function keyValue(): void
     {
         $key       = 'key';
         $value     = 'value';

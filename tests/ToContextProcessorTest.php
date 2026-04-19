@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace WyriHaximus\Tests\Monolog\Processors;
 
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Safe\DateTimeImmutable;
 use WyriHaximus\Monolog\Processors\ToContextProcessor;
@@ -12,7 +13,8 @@ use WyriHaximus\Monolog\Processors\ToContextProcessor;
 /** @internal */
 final class ToContextProcessorTest extends TestCase
 {
-    public function testKeyValue(): void
+    #[Test]
+    public function keyValue(): void
     {
         $now       = new DateTimeImmutable();
         $extra     = ['foo' => 'bar'];
