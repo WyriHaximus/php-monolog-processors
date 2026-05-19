@@ -10,7 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\ExceptionClassProcessor;
 
-/** @internal */
 final class ExceptionClassProcessorTest extends TestCase
 {
     #[Test]

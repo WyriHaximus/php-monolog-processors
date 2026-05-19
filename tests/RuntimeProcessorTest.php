@@ -11,7 +11,6 @@ use WyriHaximus\Monolog\Processors\RuntimeProcessor;
 
 use function sleep;
 
-/** @internal */
 final class RuntimeProcessorTest extends TestCase
 {
     #[Test]

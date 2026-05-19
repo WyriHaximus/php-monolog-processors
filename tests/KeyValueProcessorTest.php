@@ -9,7 +9,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\KeyValueProcessor;
 
-/** @internal */
 final class KeyValueProcessorTest extends TestCase
 {
     #[Test]
