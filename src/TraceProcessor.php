@@ -13,7 +13,8 @@ use function debug_backtrace;
 
 use const DEBUG_BACKTRACE_IGNORE_ARGS;
 
-final class TraceProcessor implements ProcessorInterface
+/** @api */
+final readonly class TraceProcessor implements ProcessorInterface
 {
     /** @phpstan-ignore-next-line */
     public function __construct(private bool $always = false)

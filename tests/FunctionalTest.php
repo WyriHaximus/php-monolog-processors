@@ -9,6 +9,7 @@ use Monolog\Level;
 use Monolog\Logger;
 use Monolog\LogRecord;
 use Monolog\Utils;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Log\LogLevel;
 use WyriHaximus\Monolog\Processors\CopyProcessor;
 use WyriHaximus\Monolog\Processors\ExceptionClassProcessor;
@@ -26,7 +27,8 @@ final class FunctionalTest extends TestCase
     /** @phpstan-var array<LogRecord> */
     private array $logs = [];
 
-    public function testBasic(): void
+    #[Test]
+    public function basic(): void
     {
         $monolog = $this->provideMonolog();
 
@@ -39,6 +41,7 @@ final class FunctionalTest extends TestCase
 //        unset($this->logs[0]['datetime'], $this->logs[0]->context['datetime']);
 
         self::assertIsFloat($this->logs[0]->extra['runtime']);
+        self::assertIsArray($this->logs[0]->context['extra']);
         self::assertIsFloat($this->logs[0]->context['extra']['runtime']);
         self::assertSame($this->logs[0]->extra['runtime'], $this->logs[0]->context['extra']['runtime']);
 //        unset($this->logs[0]->extra['runtime'], $this->logs[0]->context->extra['runtime']);
@@ -60,7 +63,8 @@ final class FunctionalTest extends TestCase
         ], $this->logs[0]->extra);
     }
 
-    public function testException(): void
+    #[Test]
+    public function exception(): void
     {
         $monolog = $this->provideMonolog();
 
@@ -88,6 +92,7 @@ final class FunctionalTest extends TestCase
 //        unset($this->logs[0]['datetime'], $this->logs[0]->context['datetime']);
 
         self::assertIsFloat($this->logs[0]->extra['runtime']);
+        self::assertIsArray($this->logs[0]->context['extra']);
         self::assertIsFloat($this->logs[0]->context['extra']['runtime']);
         self::assertSame($this->logs[0]->extra['runtime'], $this->logs[0]->context['extra']['runtime']);
 //        unset($this->logs[0]->extra['runtime'], $this->logs[0]->context->extra['runtime']);
@@ -131,7 +136,7 @@ final class FunctionalTest extends TestCase
     {
         $monolog = new Logger('logger');
 
-        $monolog->pushHandler(new FunctionalTestLogger(function ($log): void {
+        $monolog->pushHandler(new FunctionalTestLogger(function (LogRecord $log): void {
             $this->logs[] = $log;
         }));
 

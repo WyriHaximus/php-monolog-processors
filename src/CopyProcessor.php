@@ -11,8 +11,10 @@ use function array_merge_recursive;
 use function explode;
 use function igorw\assoc_in;
 use function igorw\get_in;
+use function is_array;
 
-final class CopyProcessor implements ProcessorInterface
+/** @api */
+final readonly class CopyProcessor implements ProcessorInterface
 {
     /** @var array<string> */
     private array $from;
@@ -30,7 +32,10 @@ final class CopyProcessor implements ProcessorInterface
     {
         $value = get_in($record->toArray(), $this->from);
         if ($value !== null) {
-            $record = $record->with(...array_merge_recursive(assoc_in([], $this->to, $value), ['context' => $record->context, 'extra' => $record->extra]));
+            $base = assoc_in([], $this->to, $value);
+            if (is_array($base)) {
+                $record = $record->with(...array_merge_recursive($base, ['context' => $record->context, 'extra' => $record->extra]));
+            }
         }
 
         return $record;
