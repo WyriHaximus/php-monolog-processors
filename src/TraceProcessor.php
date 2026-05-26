@@ -16,7 +16,7 @@ use const DEBUG_BACKTRACE_IGNORE_ARGS;
 /** @api */
 final readonly class TraceProcessor implements ProcessorInterface
 {
-    /** @phpstan-ignore-next-line */
+    /** @phpstan-ignore ergebnis.noConstructorParameterWithDefaultValue */
     public function __construct(private bool $always = false)
     {
     }

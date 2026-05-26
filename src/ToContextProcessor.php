@@ -12,12 +12,14 @@ use function array_key_exists;
 /** @api */
 final readonly class ToContextProcessor implements ProcessorInterface
 {
+    private const array DEFAULT_KEYS = ['channel', 'extra', 'datetime'];
+
     /**
      * @param array<string> $keys
      *
-     * @phpstan-ignore-next-line
+     * @phpstan-ignore ergebnis.noConstructorParameterWithDefaultValue
      */
-    public function __construct(private array $keys = ['channel', 'extra', 'datetime'])
+    public function __construct(private array $keys = self::DEFAULT_KEYS)
     {
     }
 
@@ -28,7 +30,11 @@ final readonly class ToContextProcessor implements ProcessorInterface
                 continue;
             }
 
-            $record = $record->with(context: [$key => $record->toArray()[$key]] + $record->toArray()['context']);
+            $record = $record->with(
+                context: [
+                    $key => $record->toArray()[$key],
+                ] + $record->toArray()['context'],
+            );
         }
 
         return $record;

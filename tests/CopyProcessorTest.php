@@ -9,7 +9,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\Monolog\Processors\CopyProcessor;
 
-/** @internal */
 final class CopyProcessorTest extends TestCase
 {
     #[Test]
