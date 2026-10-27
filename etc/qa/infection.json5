@@ -16,5 +16,6 @@
         "@default": true,
         "Continue_": false,
         "Minus": false
-    }
+    },
+    "threads": 64
 }
